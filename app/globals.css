@@ -437,8 +437,27 @@
   left: 0;
   display: none;
   width: 2.4rem;
+  visibility: hidden;
+  opacity: 0;
   filter: drop-shadow(0 2px 2px rgb(51 42 70 / 12%));
-  transform: translate3d(var(--pointer-x), var(--pointer-y), 0) translate(-50%, -50%);
+  transition: opacity 180ms ease-out;
+}
+
+.butterfly-cursor.is-following {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .butterfly-cursor {
+    display: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+  .butterfly-cursor {
+    display: none !important;
+  }
 }
 
 .meadow {
@@ -479,6 +498,94 @@
 
 .meadow-flowers g:nth-child(even) circle {
   fill: var(--garden-lavender);
+}
+
+.selected-work {
+  position: relative;
+  padding: 4.5rem clamp(2rem, 7vw, 6rem) 4.75rem;
+  border-top: 1px solid rgb(51 42 70 / 12%);
+}
+
+.selected-work .vine-art {
+  width: 5.5rem;
+  opacity: 0.78;
+}
+
+.selected-work .vine-left {
+  left: -2.5rem;
+}
+
+.selected-work .vine-right {
+  right: -2.5rem;
+}
+
+.selected-work-title {
+  margin: 0 0 1.75rem;
+  color: var(--garden-ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  display: flex;
+  min-height: 12.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.35rem;
+  border: 1px solid rgb(93 66 144 / 20%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 42%);
+  box-shadow: 0 4px 14px rgb(51 42 70 / 4%);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgb(93 66 144 / 40%);
+  box-shadow: 0 10px 24px rgb(51 42 70 / 9%);
+}
+
+.project-name {
+  margin: 0;
+  color: var(--garden-ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.project-description {
+  margin: 0.75rem 0 1.2rem;
+  color: var(--garden-ink);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  margin-top: auto;
+  color: var(--garden-purple);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgb(93 66 144 / 34%);
+  text-underline-offset: 0.25em;
+}
+
+.project-link:focus-visible {
+  border-radius: 0.2rem;
+  outline: 2px solid var(--garden-purple);
+  outline-offset: 4px;
 }
 
 .details {
@@ -718,8 +825,29 @@
     height: 7.5rem;
   }
 
+  .project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .selected-work {
+  padding: 3.5rem 1.5rem;
+  }
+
+  .selected-work .vine-art {
+  width: 3.5rem;
+  }
+
+  .selected-work .vine-left {
+  left: -2.4rem;
+  }
+
+  .selected-work .vine-right {
+  right: -2.4rem;
+  }
+
   .details {
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
+
     gap: 2.5rem;
     padding: 3.5rem 1.5rem 3.5rem;
   }
@@ -743,6 +871,16 @@
   .card-footer {
     align-items: flex-start;
     padding: 1.6rem 1.5rem 2.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    min-height: 11rem;
   }
 }
 

@@ -4,6 +4,44 @@ import { useEffect } from 'react'
 
 const offerings = ['Shops', 'Studios', 'Trades', 'Clinics', 'Kitchens']
 
+const projects = [
+  {
+    name: 'Fries B4 Guys',
+    description: 'Halal burgers, hand cut fries, Turkish kumpir and Belgian waffles in Allston. Open daily until 2 AM.',
+    url: 'https://friesb4guys.boston',
+  },
+  {
+    name: 'Hebron Market',
+    description: 'Halal butcher and Middle Eastern grocery on Tremont Street in Mission Hill.',
+    url: 'https://hebron-market.com',
+  },
+  {
+    name: 'Nubian Markets',
+    description: "Halal butcher, African grocery and cafe in Roxbury's Nubian Square, celebrating African diaspora food.",
+    url: 'https://nubianmarkets.com',
+  },
+  {
+    name: 'Crispy Dough Pizzeria',
+    description: 'Halal pizzeria in Mission Hill. Fresh dough pizza, calzones, subs and pasta, open until 3 AM on weekends.',
+    url: 'https://crispydoughpizza.com',
+  },
+  {
+    name: 'Crispy Dough Shawarma',
+    description: 'Chicken shawarma cut off the spit and wrapped to order. Opening soon on Tremont Street.',
+    url: 'https://crispydoughshawarma.com',
+  },
+  {
+    name: 'Land of Fire',
+    description: 'Azerbaijani kitchen opening on Broadway in Somerville. Mangal kebabs, homemade bread, kufta soup and baklava.',
+    url: 'https://landoffire-somerville.vercel.app',
+  },
+  {
+    name: 'Honey Bridge',
+    description: 'Restaurant marketing and consulting, with halal restaurants as the specialty.',
+    url: 'https://gohoneybridge.com',
+  },
+]
+
 function Butterfly({ className }: { className: string }) {
   return (
     <svg className={`butterfly ${className}`} viewBox="0 0 60 48" aria-hidden="true">
@@ -97,17 +135,54 @@ export default function Page() {
 
     page.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element))
 
-    const finePointer = window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)')
-    const followPointer = (event: PointerEvent) => {
-      page.style.setProperty('--pointer-x', `${event.clientX}px`)
-      page.style.setProperty('--pointer-y', `${event.clientY}px`)
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const cursorButterfly = page.querySelector<SVGSVGElement>('.butterfly-cursor')
+    let targetX = 0
+    let targetY = 0
+    let currentX = 0
+    let currentY = 0
+    let currentAngle = 0
+    let animationFrame = 0
+
+    const animateButterfly = () => {
+      const nextX = targetX + 18
+      const nextY = targetY + 18
+      const deltaX = nextX - currentX
+      const deltaY = nextY - currentY
+
+      currentX += deltaX * 0.12
+      currentY += deltaY * 0.12
+
+      const targetAngle = Math.atan2(deltaY, deltaX) * (180 / Math.PI) * 0.22
+      currentAngle += (targetAngle - currentAngle) * 0.16
+
+      cursorButterfly?.style.setProperty(
+        'transform',
+        `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) rotate(${currentAngle}deg)`,
+      )
+
+      if (Math.abs(deltaX) > 0.1 || Math.abs(deltaY) > 0.1 || Math.abs(currentAngle - targetAngle) > 0.1) {
+        animationFrame = window.requestAnimationFrame(animateButterfly)
+      } else {
+        animationFrame = 0
+      }
     }
 
-    if (finePointer.matches) window.addEventListener('pointermove', followPointer, { passive: true })
+    const followPointer = (event: PointerEvent) => {
+      targetX = event.clientX
+      targetY = event.clientY
+      cursorButterfly?.classList.add('is-following')
+
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(animateButterfly)
+    }
+
+    const canFollowPointer = !reducedMotion.matches && cursorButterfly
+    if (canFollowPointer) window.addEventListener('pointermove', followPointer, { passive: true })
 
     return () => {
       observer.disconnect()
       window.removeEventListener('pointermove', followPointer)
+      if (animationFrame) window.cancelAnimationFrame(animationFrame)
     }
   }, [])
 
@@ -140,6 +215,21 @@ export default function Page() {
             <span className="mark-caption">Websites for people who built something worth showing</span>
           </div>
           <Meadow />
+        </section>
+
+        <section className="selected-work" aria-labelledby="selected-work-title">
+          <Vine side="left" />
+          <Vine side="right" />
+          <h2 className="selected-work-title scroll-reveal" id="selected-work-title" data-reveal>Selected work</h2>
+          <div className="project-grid">
+            {projects.map((project) => (
+              <article className="project-card scroll-reveal" data-reveal key={project.name}>
+                <h3 className="project-name">{project.name}</h3>
+                <p className="project-description">{project.description}</p>
+                <a className="project-link" href={project.url} target="_blank" rel="noopener">Visit site</a>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="details scroll-reveal" aria-label="How I work" data-reveal>
