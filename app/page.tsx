@@ -20,7 +20,7 @@ export default function Page() {
           <div className="hero-mark" aria-hidden="true">
             <span className="mark-letter">Y</span>
             <span className="mark-rule" />
-            <span className="mark-caption">Useful first.<br />Beautiful after.</span>
+            <span className="mark-caption">Websites for people who built something worth showing</span>
           </div>
         </section>
 
