@@ -264,6 +264,13 @@ body {
   line-height: 1.35;
 }
 
+.github-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .hero-mark {
   display: flex;
   flex: 0 0 9.5rem;
