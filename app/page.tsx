@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 
 const offerings = ['Shops', 'Studios', 'Trades', 'Clinics', 'Kitchens']
 
+const grassStems = 'M9 190q4-38 20-64m5 64q-1-27-14-43m34 43q8-48 27-73m0 73q1-35-11-52m76 52q-1-49 14-75m5 75q10-34 25-49m45 49q1-37 17-60m12 60q8-26 23-38m63 38q0-49 17-74m5 74q12-30 27-46m75 46q5-40 22-62m4 62q9-30 24-41m81 41q-1-49 18-77m4 77q12-33 26-47m78 47q0-40 18-65m8 65q12-25 25-36m65 36q2-52 22-77m1 77q10-33 26-46m70 46q-1-37 16-60m10 60q12-27 25-39m86 39q2-44 21-69m5 69q10-31 24-42m79 42q-2-48 17-74m5 74q10-33 25-48m71 48q1-36 15-58m10 58q9-27 21-38'
+
 const projects = [
   {
     name: 'Fries B4 Guys',
@@ -52,18 +54,24 @@ function Butterfly({ className }: { className: string }) {
 function SunAndClouds() {
   return (
     <svg className="sky-illustration" viewBox="0 0 360 200" aria-hidden="true">
-      <g className="sun" transform="translate(258 68)">
-        <g className="sun-rays">
-          <path d="M0-58v18M0 40v18M-58 0h18M40 0h18M-41-41l13 13m56 56 13 13m0-82L28-28m-56 56-13 13" />
-          <path d="M-22-54l7 17m30 74 7 17M-54-22l17 7m74 30 17 7M-53 22l17-7m74-30 17-7M-22 54l7-17m30-74 7-17" />
+      <g className="sun-arrival">
+        <g className="sun" transform="translate(258 68)">
+          <g className="sun-rays">
+            <path d="M0-58v18M0 40v18M-58 0h18M40 0h18M-41-41l13 13m56 56 13 13m0-82L28-28m-56 56-13 13" />
+            <path d="M-22-54l7 17m30 74 7 17M-54-22l17 7m74 30 17 7M-53 22l17-7m74-30 17-7M-22 54l7-17m30-74 7-17" />
+          </g>
+          <circle className="sun-disc" r="31" />
         </g>
-        <circle className="sun-disc" r="31" />
       </g>
-      <g className="cloud cloud-one" transform="translate(36 95)">
-        <path d="M0 22c0-10 8-17 18-17 5-13 24-14 31-1 13-2 22 6 22 17 0 9-7 15-17 15H18C7 36 0 31 0 22Z" />
+      <g className="cloud-arrival cloud-arrival-left">
+        <g className="cloud cloud-one" transform="translate(36 95)">
+          <path d="M0 22c0-10 8-17 18-17 5-13 24-14 31-1 13-2 22 6 22 17 0 9-7 15-17 15H18C7 36 0 31 0 22Z" />
+        </g>
       </g>
-      <g className="cloud cloud-two" transform="translate(157 150) scale(.68)">
-        <path d="M0 22c0-10 8-17 18-17 5-13 24-14 31-1 13-2 22 6 22 17 0 9-7 15-17 15H18C7 36 0 31 0 22Z" />
+      <g className="cloud-arrival cloud-arrival-right">
+        <g className="cloud cloud-two" transform="translate(157 150) scale(.68)">
+          <path d="M0 22c0-10 8-17 18-17 5-13 24-14 31-1 13-2 22 6 22 17 0 9-7 15-17 15H18C7 36 0 31 0 22Z" />
+        </g>
       </g>
     </svg>
   )
@@ -76,15 +84,15 @@ function Vine({ side }: { side: 'left' | 'right' }) {
       <path className="vine-line vine-branch" d={side === 'left' ? 'M42 425c-35-8-40-34-36-57m50-66c35-4 45-28 39-54m-8-81c-30-2-42-24-36-47' : 'M106 420c35-7 43-33 38-56m-50-62c-34-5-42-30-36-55m7-82c31-3 40-26 33-49'} />
       <path className="leaf leaf-one" d="M34 365c-24-1-31-15-28-29 21-1 34 9 28 29Zm67-117c24-2 32-16 27-30-22 0-35 11-27 30Zm-42-142c-23-2-31-15-27-30 21 0 35 10 27 30Z" />
       <path className="leaf leaf-two" d="M55 282c-21 5-32-5-32-20 20-7 36 0 32 20Zm34-168c22 3 31-9 29-24-21-5-36 3-29 24Zm-44 318c22 4 32-8 29-23-21-5-36 2-29 23Z" />
-      <g className="blossom" transform="translate(44 390)">
+      <g className="blossom blossom-first" transform="translate(44 390)">
         <path className="petals" d="M0-11c-8-9-18-3-12 5-11 5-5 16 4 12 1 12 14 11 14 1 10 6 17-6 7-12 6-10-5-17-12-6Z" />
         <circle className="flower-center" r="4" />
       </g>
-      <g className="blossom blossom-small" transform="translate(80 180)">
+      <g className="blossom blossom-small blossom-second" transform="translate(80 180)">
         <path className="petals" d="M0-9c-7-8-15-3-10 4-9 4-4 13 4 10 1 10 12 9 12 1 8 5 14-5 6-10 5-8-4-14-10-5Z" />
         <circle className="flower-center" r="3" />
       </g>
-      <g className="blossom blossom-small" transform="translate(34 72)">
+      <g className="blossom blossom-small blossom-third" transform="translate(34 72)">
         <path className="petals" d="M0-9c-7-8-15-3-10 4-9 4-4 13 4 10 1 10 12 9 12 1 8 5 14-5 6-10 5-8-4-14-10-5Z" />
         <circle className="flower-center" r="3" />
       </g>
@@ -96,15 +104,69 @@ function Meadow() {
   return (
     <svg className="meadow" viewBox="0 0 1200 190" preserveAspectRatio="none" aria-hidden="true">
       <path className="meadow-hill" d="M0 105c154-35 223 19 374-1 139-19 223-62 371-32 186 38 282-9 455-35v153H0Z" />
-      <g className="grass-stems" fill="none" strokeLinecap="round">
-        <path d="M9 190q4-38 20-64m5 64q-1-27-14-43m34 43q8-48 27-73m0 73q1-35-11-52m76 52q-1-49 14-75m5 75q10-34 25-49m45 49q1-37 17-60m12 60q8-26 23-38m63 38q0-49 17-74m5 74q12-30 27-46m75 46q5-40 22-62m4 62q9-30 24-41m81 41q-1-49 18-77m4 77q12-33 26-47m78 47q0-40 18-65m8 65q12-25 25-36m65 36q2-52 22-77m1 77q10-33 26-46m70 46q-1-37 16-60m10 60q12-27 25-39m86 39q2-44 21-69m5 69q10-31 24-42m79 42q-2-48 17-74m5 74q10-33 25-48m71 48q1-36 15-58m10 58q9-27 21-38" />
-      </g>
+      <defs>
+        {Array.from({ length: 6 }, (_, index) => (
+          <clipPath id={`grass-clip-${index}`} clipPathUnits="userSpaceOnUse" key={index}>
+            <rect x={index * 200} y="0" width="200" height="190" />
+          </clipPath>
+        ))}
+        <clipPath id="bee-body-clip"><ellipse cx="0" cy="0" rx="11" ry="6" /></clipPath>
+      </defs>
+      {Array.from({ length: 6 }, (_, index) => (
+        <g className={`grass-wave grass-wave-${index + 1}`} clipPath={`url(#grass-clip-${index})`} key={index}>
+          <path className="grass-stems" d={grassStems} />
+        </g>
+      ))}
       <g className="meadow-flowers">
         <g transform="translate(155 127)"><path d="M0 0v39" /><circle cx="0" cy="0" r="5" /><circle cx="-7" cy="-3" r="4" /><circle cx="7" cy="-3" r="4" /><circle cx="0" cy="-8" r="4" /></g>
         <g transform="translate(374 111)"><path d="M0 0v47" /><circle cx="0" cy="0" r="5" /><circle cx="-7" cy="-3" r="4" /><circle cx="7" cy="-3" r="4" /><circle cx="0" cy="-8" r="4" /></g>
         <g transform="translate(628 126)"><path d="M0 0v40" /><circle cx="0" cy="0" r="5" /><circle cx="-7" cy="-3" r="4" /><circle cx="7" cy="-3" r="4" /><circle cx="0" cy="-8" r="4" /></g>
         <g transform="translate(864 105)"><path d="M0 0v48" /><circle cx="0" cy="0" r="5" /><circle cx="-7" cy="-3" r="4" /><circle cx="7" cy="-3" r="4" /><circle cx="0" cy="-8" r="4" /></g>
         <g transform="translate(1064 127)"><path d="M0 0v38" /><circle cx="0" cy="0" r="5" /><circle cx="-7" cy="-3" r="4" /><circle cx="7" cy="-3" r="4" /><circle cx="0" cy="-8" r="4" /></g>
+      </g>
+      <g className="bee-flight" aria-hidden="true">
+        <animateMotion dur="32s" repeatCount="indefinite" path="M150 100 C150 50 350 50 600 100 C850 150 1050 150 1050 100 C1050 50 850 50 600 100 C350 150 150 150 150 100" />
+        <g className="meadow-bee">
+          <ellipse className="bee-wing bee-wing-back" cx="-5" cy="-7" rx="6" ry="3.5" />
+          <ellipse className="bee-wing bee-wing-front" cx="4" cy="-7" rx="6" ry="3.5" />
+          <ellipse className="bee-body" cx="0" cy="0" rx="11" ry="6" />
+          <g clipPath="url(#bee-body-clip)" className="bee-stripes">
+            <path d="M-5-8v16m7-16v16" />
+          </g>
+          <path className="bee-antennae" d="M-3-5c-2-5-5-6-7-6m12 6c2-5 5-6 7-6" />
+        </g>
+      </g>
+    </svg>
+  )
+}
+
+function FallingPetals() {
+  return (
+    <svg className="falling-petals" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <g className="petal-drop petal-drop-one" transform="translate(12 -12)">
+        <animateTransform attributeName="transform" type="translate" values="12 -12;16 35;9 72;14 112" dur="24s" repeatCount="indefinite" />
+        <path className="falling-petal-shape" d="M0 0c-7-7-12 2-6 7 4 3 7 5 7 5s5-4 7-8C12-2 5-6 0 0Z">
+        </path>
+      </g>
+      <g className="petal-drop petal-drop-two" transform="translate(34 -25)">
+        <animateTransform attributeName="transform" type="translate" values="34 -25;29 20;37 62;32 112" dur="29s" begin="-9s" repeatCount="indefinite" />
+        <path className="falling-petal-shape" d="M0 0c-6-7-12 1-6 7 4 3 7 5 7 5s5-4 7-8C12-2 5-6 0 0Z">
+        </path>
+      </g>
+      <g className="petal-drop petal-drop-three" transform="translate(56 -18)">
+        <animateTransform attributeName="transform" type="translate" values="56 -18;61 24;52 69;59 112" dur="26s" begin="-15s" repeatCount="indefinite" />
+        <path className="falling-petal-shape" d="M0 0c-7-7-12 2-6 7 4 3 7 5 7 5s5-4 7-8C12-2 5-6 0 0Z">
+        </path>
+      </g>
+      <g className="petal-drop petal-drop-four" transform="translate(78 -30)">
+        <animateTransform attributeName="transform" type="translate" values="78 -30;73 17;82 63;76 112" dur="31s" begin="-5s" repeatCount="indefinite" />
+        <path className="falling-petal-shape" d="M0 0c-6-7-12 1-6 7 4 3 7 5 7 5s5-4 7-8C12-2 5-6 0 0Z">
+        </path>
+      </g>
+      <g className="petal-drop petal-drop-five" transform="translate(92 -20)">
+        <animateTransform attributeName="transform" type="translate" values="92 -20;88 30;96 74;90 112" dur="28s" begin="-19s" repeatCount="indefinite" />
+        <path className="falling-petal-shape" d="M0 0c-7-7-12 2-6 7 4 3 7 5 7 5s5-4 7-8C12-2 5-6 0 0Z">
+        </path>
       </g>
     </svg>
   )
@@ -131,6 +193,56 @@ export default function Page() {
     page.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element))
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const finePointer = window.matchMedia('(pointer: fine)')
+    const vines = Array.from(page.querySelectorAll<SVGSVGElement>('.vine-art'))
+    let scrollFrame = 0
+
+    const updateVines = () => {
+      scrollFrame = 0
+      if (reducedMotion.matches) return
+
+      const scrollY = window.scrollY
+      vines.forEach((vine) => {
+        const bounds = vine.getBoundingClientRect()
+        const sectionTop = scrollY + bounds.top
+        const start = sectionTop + bounds.height * 0.12
+        const end = sectionTop + bounds.height * 0.85
+        const progress = Math.min(1, Math.max(0, (scrollY - start) / Math.max(1, end - start)))
+        vine.style.setProperty('--vine-progress', progress.toFixed(3))
+      })
+    }
+
+    const scheduleVineUpdate = () => {
+      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateVines)
+    }
+
+    if (!reducedMotion.matches) {
+      window.addEventListener('scroll', scheduleVineUpdate, { passive: true })
+      window.addEventListener('resize', scheduleVineUpdate, { passive: true })
+      scheduleVineUpdate()
+    }
+
+    const tiltCards = Array.from(page.querySelectorAll<HTMLElement>('.project-card'))
+    const tiltCard = (event: PointerEvent) => {
+      if (!finePointer.matches || reducedMotion.matches || event.pointerType === 'touch') return
+      const card = event.currentTarget as HTMLElement
+      const bounds = card.getBoundingClientRect()
+      const horizontal = (event.clientX - bounds.left) / bounds.width
+      const vertical = (event.clientY - bounds.top) / bounds.height
+      card.style.setProperty('--tilt-x', `${(0.5 - vertical) * 8}deg`)
+      card.style.setProperty('--tilt-y', `${(horizontal - 0.5) * 8}deg`)
+    }
+    const resetCardTilt = (event: PointerEvent) => {
+      const card = event.currentTarget as HTMLElement
+      card.style.removeProperty('--tilt-x')
+      card.style.removeProperty('--tilt-y')
+    }
+
+    tiltCards.forEach((card) => {
+      card.addEventListener('pointermove', tiltCard, { passive: true })
+      card.addEventListener('pointerleave', resetCardTilt)
+    })
+
     const cursorButterfly = page.querySelector<SVGSVGElement>('.butterfly-cursor')
     let targetX = 0
     let targetY = 0
@@ -171,18 +283,26 @@ export default function Page() {
       if (!animationFrame) animationFrame = window.requestAnimationFrame(animateButterfly)
     }
 
-    const canFollowPointer = !reducedMotion.matches && cursorButterfly
+    const canFollowPointer = finePointer.matches && !reducedMotion.matches && cursorButterfly
     if (canFollowPointer) window.addEventListener('pointermove', followPointer, { passive: true })
 
     return () => {
       observer.disconnect()
       window.removeEventListener('pointermove', followPointer)
+      window.removeEventListener('scroll', scheduleVineUpdate)
+      window.removeEventListener('resize', scheduleVineUpdate)
+      tiltCards.forEach((card) => {
+        card.removeEventListener('pointermove', tiltCard)
+        card.removeEventListener('pointerleave', resetCardTilt)
+      })
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame)
       if (animationFrame) window.cancelAnimationFrame(animationFrame)
     }
   }, [])
 
   return (
     <main className="garden-page">
+      <FallingPetals />
       <div className="garden-content">
         <header className="card-header scroll-reveal" data-reveal>
           <a className="wordmark" href="#top" aria-label="Yasmeen Hasan, home">
@@ -199,9 +319,9 @@ export default function Page() {
           <Butterfly className="butterfly-blue butterfly-drift-two" />
           <Butterfly className="butterfly-lavender butterfly-drift-three" />
           <div className="hero-copy">
-            <p className="eyebrow">A personal calling card</p>
-            <h1 id="name-heading">Yasmeen<br />Hasan<span className="heading-period">.</span></h1>
-            <p className="intro">I design and build websites for small businesses.</p>
+            <p className="eyebrow hero-entrance hero-eyebrow">A personal calling card</p>
+            <h1 id="name-heading"><span className="hero-name-line hero-entrance hero-name-yasmeen">Yasmeen</span><span className="hero-name-line hero-entrance hero-name-hasan">Hasan<span className="heading-period">.</span></span></h1>
+            <p className="intro hero-entrance hero-intro">I design and build websites for small businesses.</p>
             <p className="github-note">Now on GitHub</p>
           </div>
           <div className="hero-mark" aria-hidden="true">
@@ -219,6 +339,10 @@ export default function Page() {
           <div className="project-grid">
             {projects.map((project) => (
               <article className="project-card scroll-reveal" data-reveal key={project.name}>
+                <svg className="card-blossom" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                  <path d="M18 8c-5-7-12-2-8 4-7 3-3 10 3 8 1 8 10 7 10 1 7 4 12-4 5-8 4-7-3-12-8-4Z" />
+                  <circle cx="18" cy="17" r="3" />
+                </svg>
                 <h3 className="project-name">{project.name}</h3>
                 <p className="project-description">{project.description}</p>
                 <a className="project-link" href={project.url} target="_blank" rel="noopener">Visit site</a>

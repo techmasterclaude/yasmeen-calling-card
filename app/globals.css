@@ -118,9 +118,39 @@
 }
 
 .garden-content {
+  position: relative;
+  z-index: 1;
   width: min(100% - 3rem, 70rem);
   margin-inline: auto;
 }
+
+.falling-petals {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.falling-petal-shape {
+  fill: #eab3c6;
+  opacity: 0.72;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: petal-sway 7s ease-in-out infinite alternate;
+}
+
+.petal-drop-two .falling-petal-shape,
+.petal-drop-four .falling-petal-shape {
+  fill: #d8c8ef;
+}
+
+.petal-drop-two .falling-petal-shape { animation-delay: -2s; }
+.petal-drop-three .falling-petal-shape { animation-delay: -4s; }
+.petal-drop-four .falling-petal-shape { animation-delay: -1s; }
+.petal-drop-five .falling-petal-shape { animation-delay: -3s; }
 
 .card-header,
 .card-footer {
@@ -278,6 +308,48 @@
   animation: cloud-float 22s ease-in-out -7s infinite alternate-reverse;
 }
 
+.hero-name-line {
+  display: block;
+}
+
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.hero.is-visible .hero-eyebrow {
+  animation: hero-rise 650ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+}
+
+.hero.is-visible .hero-name-yasmeen {
+  animation: hero-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms both;
+}
+
+.hero.is-visible .hero-name-hasan {
+  animation: hero-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both;
+}
+
+.hero.is-visible .hero-intro {
+  animation: hero-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 720ms both;
+}
+
+.sun-arrival,
+.cloud-arrival {
+  opacity: 0;
+}
+
+.hero.is-visible .sun-arrival {
+  animation: sun-rise 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) 180ms both;
+}
+
+.hero.is-visible .cloud-arrival-left {
+  animation: cloud-arrive-left 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) 220ms both;
+}
+
+.hero.is-visible .cloud-arrival-right {
+  animation: cloud-arrive-right 1.3s cubic-bezier(0.2, 0.7, 0.2, 1) 420ms both;
+}
+
 .vine-art {
   position: absolute;
   z-index: 1;
@@ -302,7 +374,7 @@
   fill: none;
   stroke: var(--garden-leaf);
   stroke-dasharray: 1100;
-  stroke-dashoffset: 1100;
+  stroke-dashoffset: calc(1100 * (1 - var(--vine-progress, 0)));
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.2;
@@ -311,21 +383,22 @@
 .vine-branch {
   stroke: var(--garden-leaf-light);
   stroke-dasharray: 180;
-  stroke-dashoffset: 180;
+  stroke-dashoffset: calc(180 * (1 - var(--vine-progress, 0)));
   stroke-width: 1.5;
 }
 
 .leaf {
+  --leaf-at: 0.14;
   fill: #95a17b;
-  opacity: 0;
+  opacity: clamp(0, calc((var(--vine-progress, 0) - var(--leaf-at)) * 5), 0.96);
   transform-box: fill-box;
   transform-origin: center;
-  transform: scale(0.35) rotate(-18deg);
+  transform: scale(clamp(0.35, calc((var(--vine-progress, 0) - var(--leaf-at)) * 5), 1));
 }
 
 .leaf-two {
+  --leaf-at: 0.4;
   fill: #b0b68c;
-  transform: scale(0.35) rotate(18deg);
 }
 
 .blossom .petals {
@@ -334,40 +407,24 @@
   stroke-width: 1;
   transform-box: fill-box;
   transform-origin: center;
-  transform: scale(0.08);
+  transform: scale(clamp(0.08, calc((var(--vine-progress, 0) - var(--blossom-at, 0.2)) * 7), 1));
+}
+
+.blossom-first {
+  --blossom-at: 0.2;
+}
+
+.blossom-second {
+  --blossom-at: 0.58;
+}
+
+.blossom-third {
+  --blossom-at: 0.84;
 }
 
 .blossom .flower-center {
   fill: #e7b75f;
-  opacity: 0;
-}
-
-.is-visible .vine-line {
-  animation: vine-draw 3.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.is-visible .vine-branch {
-  animation: branch-draw 2s ease-out 0.8s forwards;
-}
-
-.is-visible .leaf {
-  animation: leaf-open 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.is-visible .leaf-two {
-  animation-delay: 0.65s;
-}
-
-.is-visible .blossom .petals {
-  animation: flower-open 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.is-visible .blossom-small .petals {
-  animation-delay: 0.45s;
-}
-
-.is-visible .blossom .flower-center {
-  animation: center-open 0.3s ease-out 0.45s forwards;
+  opacity: clamp(0, calc((var(--vine-progress, 0) - var(--blossom-at, 0.2) - 0.08) * 8), 1);
 }
 
 .butterfly {
@@ -476,12 +533,65 @@
   fill: #e9edda;
 }
 
+.grass-wave {
+  transform-box: view-box;
+  animation: meadow-wave 4.8s ease-in-out infinite alternate;
+}
+
+.grass-wave-1 { transform-origin: 8.333% 100%; }
+.grass-wave-2 { transform-origin: 25% 100%; animation-delay: 180ms; }
+.grass-wave-3 { transform-origin: 41.667% 100%; animation-delay: 360ms; }
+.grass-wave-4 { transform-origin: 58.333% 100%; animation-delay: 540ms; }
+.grass-wave-5 { transform-origin: 75% 100%; animation-delay: 720ms; }
+.grass-wave-6 { transform-origin: 91.667% 100%; animation-delay: 900ms; }
+
 .grass-stems {
+  fill: none;
   stroke: #81906d;
+  stroke-linecap: round;
   stroke-width: 1.6;
+}
+
+.bee-flight {
+  transform-box: view-box;
+  transform-origin: center;
+}
+
+.meadow-bee {
+  overflow: visible;
+}
+
+.bee-wing {
+  fill: #fffbf4;
+  fill-opacity: 0.85;
+  stroke: #958aa0;
+  stroke-width: 0.8;
   transform-box: fill-box;
-  transform-origin: bottom center;
-  animation: meadow-sway 5s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+  animation: bee-wing-flap 220ms ease-in-out infinite alternate;
+}
+
+.bee-wing-back {
+  animation-delay: -110ms;
+}
+
+.bee-body {
+  fill: #5d4290;
+  stroke: #332a46;
+  stroke-width: 1;
+}
+
+.bee-stripes {
+  fill: none;
+  stroke: #f1c85e;
+  stroke-width: 3.2;
+}
+
+.bee-antennae {
+  fill: none;
+  stroke: #332a46;
+  stroke-linecap: round;
+  stroke-width: 1;
 }
 
 .meadow-flowers path {
@@ -535,6 +645,7 @@
 }
 
 .project-card {
+  position: relative;
   display: flex;
   min-height: 12.5rem;
   flex-direction: column;
@@ -544,13 +655,51 @@
   border-radius: 1rem;
   background: rgb(255 255 255 / 42%);
   box-shadow: 0 4px 14px rgb(51 42 70 / 4%);
+  transform: perspective(700px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
+  transform: perspective(700px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
   border-color: rgb(93 66 144 / 40%);
   box-shadow: 0 10px 24px rgb(51 42 70 / 9%);
+}
+
+.card-blossom {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.65rem;
+  width: 2.25rem;
+  overflow: visible;
+  opacity: 0;
+  transform: scale(0.35) rotate(-24deg);
+  transform-origin: bottom left;
+  transition: opacity 180ms ease, transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.card-blossom path {
+  fill: var(--garden-pink);
+  stroke: #eaa7b9;
+  stroke-width: 1;
+}
+
+.card-blossom circle {
+  fill: #e7b75f;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .card-blossom,
+  .project-card:focus-within .card-blossom {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@media (pointer: coarse) {
+  .project-card:active {
+    transform: translateY(-3px);
+  }
 }
 
 .project-name {
@@ -687,6 +836,34 @@
   transform: translateY(0);
 }
 
+.project-card.scroll-reveal.is-visible {
+  transform: perspective(700px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.project-card.scroll-reveal.is-visible:hover {
+  transform: perspective(700px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
+}
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sun-rise {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cloud-arrive-left {
+  from { opacity: 0; transform: translateX(-3rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes cloud-arrive-right {
+  from { opacity: 0; transform: translateX(3rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 @keyframes sun-turn {
   to { transform: rotate(360deg); }
 }
@@ -696,25 +873,19 @@
   to { transform: translateX(0.9rem); }
 }
 
-@keyframes vine-draw {
-  to { stroke-dashoffset: 0; }
+@keyframes meadow-wave {
+  from { transform: rotate(-1.4deg) skewX(-0.8deg); }
+  to { transform: rotate(1.4deg) skewX(0.8deg); }
 }
 
-@keyframes branch-draw {
-  to { stroke-dashoffset: 0; }
+@keyframes bee-wing-flap {
+  from { transform: scaleY(0.5) rotate(-10deg); }
+  to { transform: scaleY(1) rotate(10deg); }
 }
 
-@keyframes leaf-open {
-  to { opacity: 0.96; transform: scale(1) rotate(0deg); }
-}
-
-@keyframes flower-open {
-  70% { transform: scale(1.12); }
-  to { transform: scale(1); }
-}
-
-@keyframes center-open {
-  to { opacity: 1; }
+@keyframes petal-sway {
+  from { transform: scale(0.06) rotate(-24deg); }
+  to { transform: scale(0.06) rotate(24deg); }
 }
 
 @keyframes wing-flutter {
@@ -738,11 +909,6 @@
   0%, 100% { transform: translate(0, 0) rotate(-4deg); }
   35% { transform: translate(-2rem, -1.5rem) rotate(12deg); }
   67% { transform: translate(1.8rem, -0.6rem) rotate(-9deg); }
-}
-
-@keyframes meadow-sway {
-  from { transform: rotate(-1deg) skewX(-1deg); }
-  to { transform: rotate(1deg) skewX(1deg); }
 }
 
 @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -917,6 +1083,29 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .falling-petals,
+  .bee-flight {
+    display: none !important;
+  }
+
+  .hero-entrance,
+  .sun-arrival,
+  .cloud-arrival {
+    opacity: 1;
+    transform: none;
+  }
+
+  .grass-wave {
+    animation: none !important;
+    transform: none;
+  }
+
+  .project-card,
+  .project-card:hover,
+  .project-card:active {
+    transform: none !important;
   }
 
   .motion-ready .scroll-reveal:not(.is-visible) {
