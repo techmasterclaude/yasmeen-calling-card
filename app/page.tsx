@@ -20,12 +20,6 @@ const projects = [
     url: 'https://hebron-market.com',
   },
   {
-    name: 'Nubian Markets',
-    description: "Halal butcher, African grocery and cafe in Roxbury's Nubian Square, celebrating African diaspora food.",
-    image: '/work/nubian-markets.webp',
-    url: 'https://nubianmarkets.com',
-  },
-  {
     name: 'Crispy Dough Pizzeria',
     description: 'Halal pizzeria in Mission Hill. Fresh dough pizza, calzones, subs and pasta, open until 3 AM on weekends.',
     image: '/work/crispy-dough-pizza.webp',
