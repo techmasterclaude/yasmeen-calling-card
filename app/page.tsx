@@ -379,7 +379,7 @@ export default function Page() {
           <Vine side="left" />
           <Vine side="right" />
           <div className="audience-block">
-            <p className="section-label">For the places we know</p>
+            <p className="section-label">Who I build for</p>
             <ul className="offerings" aria-label="Business types">
               {offerings.map((offering) => <li key={offering}>{offering}</li>)}
             </ul>
