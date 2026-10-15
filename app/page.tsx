@@ -16,6 +16,7 @@ export default function Page() {
             <p className="eyebrow">A personal calling card</p>
             <h1 id="name-heading">Yasmeen<br />Hasan<span className="heading-period">.</span></h1>
             <p className="intro">I design and build websites for small businesses.</p>
+            <p className="github-note">Now on GitHub</p>
           </div>
           <div className="hero-mark" aria-hidden="true">
             <span className="mark-letter">Y</span>
