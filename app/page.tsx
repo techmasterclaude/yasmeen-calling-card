@@ -10,31 +10,37 @@ const projects = [
   {
     name: 'Fries B4 Guys',
     description: 'Halal burgers, hand cut fries, Turkish kumpir and Belgian waffles in Allston. Open daily until 2 AM.',
+    image: '/work/fries-b4-guys.webp',
     url: 'https://friesb4guys.boston',
   },
   {
     name: 'Hebron Market',
     description: 'Halal butcher and Middle Eastern grocery on Tremont Street in Mission Hill.',
+    image: '/work/hebron-market.webp',
     url: 'https://hebron-market.com',
   },
   {
     name: 'Nubian Markets',
     description: "Halal butcher, African grocery and cafe in Roxbury's Nubian Square, celebrating African diaspora food.",
+    image: '/work/nubian-markets.webp',
     url: 'https://nubianmarkets.com',
   },
   {
     name: 'Crispy Dough Pizzeria',
     description: 'Halal pizzeria in Mission Hill. Fresh dough pizza, calzones, subs and pasta, open until 3 AM on weekends.',
+    image: '/work/crispy-dough-pizza.webp',
     url: 'https://crispydoughpizza.com',
   },
   {
     name: 'Crispy Dough Shawarma',
     description: 'Chicken shawarma cut off the spit and wrapped to order. Opening soon on Tremont Street.',
+    image: '/work/crispy-dough-shawarma.webp',
     url: 'https://crispydoughshawarma.com',
   },
   {
     name: 'Honey Bridge',
     description: 'Restaurant marketing and consulting, with halal restaurants as the specialty.',
+    image: '/work/honey-bridge.webp',
     url: 'https://gohoneybridge.com',
   },
 ]
@@ -343,6 +349,24 @@ export default function Page() {
                   <path d="M18 8c-5-7-12-2-8 4-7 3-3 10 3 8 1 8 10 7 10 1 7 4 12-4 5-8 4-7-3-12-8-4Z" />
                   <circle cx="18" cy="17" r="3" />
                 </svg>
+                <a className="project-preview" href={project.url} target="_blank" rel="noopener">
+                  <span className="preview-browser-bar" aria-hidden="true">
+                    <span className="preview-dot" />
+                    <span className="preview-dot" />
+                    <span className="preview-dot" />
+                  </span>
+                  <span className="preview-screen">
+                    <img
+                      className="project-preview-image"
+                      src={project.image}
+                      alt={`Homepage of ${project.name}`}
+                      width={1200}
+                      height={750}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                </a>
                 <h3 className="project-name">{project.name}</h3>
                 <p className="project-description">{project.description}</p>
                 <a className="project-link" href={project.url} target="_blank" rel="noopener">Visit site</a>

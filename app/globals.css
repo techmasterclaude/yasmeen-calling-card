@@ -665,6 +665,70 @@
   box-shadow: 0 10px 24px rgb(51 42 70 / 9%);
 }
 
+.project-preview {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 1.1rem;
+  border: 1px solid rgb(93 66 144 / 28%);
+  border-radius: 0.7rem;
+  background: #fbf5ed;
+  box-shadow: 0 3px 10px rgb(51 42 70 / 7%);
+  text-decoration: none;
+}
+
+.preview-browser-bar {
+  display: flex;
+  height: 1.45rem;
+  flex: 0 0 1.45rem;
+  align-items: center;
+  gap: 0.28rem;
+  padding-inline: 0.55rem;
+  border-bottom: 1px solid rgb(93 66 144 / 18%);
+  background: #f6eee5;
+}
+
+.preview-dot {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: #dfb5ad;
+}
+
+.preview-dot:nth-child(2) {
+  background: #d9c48c;
+}
+
+.preview-dot:nth-child(3) {
+  background: #a8b496;
+}
+
+.preview-screen {
+  display: block;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  background: #f4eee7;
+}
+
+.project-preview-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: translateY(0);
+  transition: transform 8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-preview:focus-visible {
+  outline: 2px solid var(--garden-purple);
+  outline-offset: 3px;
+}
+
 .card-blossom {
   position: absolute;
   top: -0.7rem;
@@ -693,6 +757,10 @@
   .project-card:focus-within .card-blossom {
     opacity: 1;
     transform: scale(1) rotate(0deg);
+  }
+
+  .project-card:hover .project-preview-image {
+    transform: translateY(-8%);
   }
 }
 
@@ -1106,6 +1174,11 @@
   .project-card:hover,
   .project-card:active {
     transform: none !important;
+  }
+
+  .project-preview-image {
+    transform: none !important;
+    transition: none !important;
   }
 
   .motion-ready .scroll-reveal:not(.is-visible) {
