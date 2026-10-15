@@ -31,11 +31,6 @@ const projects = [
     url: 'https://crispydoughshawarma.com',
   },
   {
-    name: 'Land of Fire',
-    description: 'Azerbaijani kitchen opening on Broadway in Somerville. Mangal kebabs, homemade bread, kufta soup and baklava.',
-    url: 'https://landoffire-somerville.vercel.app',
-  },
-  {
     name: 'Honey Bridge',
     description: 'Restaurant marketing and consulting, with halal restaurants as the specialty.',
     url: 'https://gohoneybridge.com',
