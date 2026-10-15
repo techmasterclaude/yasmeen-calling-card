@@ -43,10 +43,9 @@ export default function Page() {
           <div>
             <p className="section-label">Get in touch</p>
             <a className="email-link" href="mailto:yas.logo3@gmail.com">
-              yas.logo3@gmail.com <span aria-hidden="true">↗</span>
+              yas.logo3@gmail.com
             </a>
           </div>
-          <p className="footer-note">Designed around what matters to your customers.</p>
         </footer>
       </div>
     </main>
